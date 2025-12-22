@@ -1,0 +1,128 @@
+syntax = "proto3";
+
+package account;
+
+option go_package = "github.com/Caesarsage/bankflow/account-service/proto/account";
+
+// Account Service Definition
+service AccountService {
+  // Unary RPCs
+  rpc GetAccount(GetAccountRequest) returns (GetAccountResponse);
+  rpc GetBalance(GetBalanceRequest) returns (GetBalanceResponse);
+  rpc UpdateBalance(UpdateBalanceRequest) returns (UpdateBalanceResponse);
+  rpc CreateHold(CreateHoldRequest) returns (CreateHoldResponse);
+  rpc ReleaseHold(ReleaseHoldRequest) returns (ReleaseHoldResponse);
+
+  // Server streaming RPC
+  rpc StreamBalanceUpdates(StreamBalanceRequest) returns (stream BalanceUpdate);
+
+  // Client streaming RPC
+  rpc BatchUpdateBalances(stream UpdateBalanceRequest) returns (BatchUpdateResponse);
+
+  // Bidirectional streaming RPC
+  rpc MonitorAccounts(stream MonitorRequest) returns (stream AccountEvent);
+}
+
+// Messages
+message Account {
+  string id = 1;
+  string account_number = 2;
+  string customer_id = 3;
+  string account_type = 4;
+  string currency = 5;
+  double balance = 6;
+  double available_balance = 7;
+  string status = 8;
+  double interest_rate = 9;
+  int64 opened_at = 10;
+  int64 created_at = 11;
+  int64 updated_at = 12;
+}
+
+message GetAccountRequest {
+  string account_id = 1;
+}
+
+message GetAccountResponse {
+  Account account = 1;
+  Error error = 2;
+}
+
+message GetBalanceRequest {
+  string account_id = 1;
+}
+
+message GetBalanceResponse {
+  double balance = 1;
+  double available_balance = 2;
+  Error error = 3;
+}
+
+message UpdateBalanceRequest {
+  string account_id = 1;
+  double amount = 2;
+  string transaction_ref = 3;
+  string description = 4;
+}
+
+message UpdateBalanceResponse {
+  bool success = 1;
+  double new_balance = 2;
+  Error error = 3;
+}
+
+message CreateHoldRequest {
+  string account_id = 1;
+  double amount = 2;
+  string reason = 3;
+  string transaction_ref = 4;
+}
+
+message CreateHoldResponse {
+  string hold_id = 1;
+  bool success = 2;
+  Error error = 3;
+}
+
+message ReleaseHoldRequest {
+  string hold_id = 1;
+}
+
+message ReleaseHoldResponse {
+  bool success = 1;
+  Error error = 2;
+}
+
+message StreamBalanceRequest {
+  string account_id = 1;
+}
+
+message BalanceUpdate {
+  string account_id = 1;
+  double balance = 2;
+  double available_balance = 3;
+  int64 timestamp = 4;
+}
+
+message BatchUpdateResponse {
+  int32 success_count = 1;
+  int32 failed_count = 2;
+  repeated Error errors = 3;
+}
+
+message MonitorRequest {
+  string account_id = 1;
+  repeated string event_types = 2;
+}
+
+message AccountEvent {
+  string event_type = 1;
+  string account_id = 2;
+  string data = 3;
+  int64 timestamp = 4;
+}
+
+message Error {
+  string code = 1;
+  string message = 2;
+}

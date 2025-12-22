@@ -1,0 +1,20 @@
+---
+# Infrastructure namespace for databases, kafka, redis
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: infrastructure
+  labels:
+    name: infrastructure
+    environment: local # update with overlays say with kustomize
+
+---
+# BankFlow application namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: bankflow
+  labels:
+    name: bankflow
+    environment: local # update with overlays say with kustomize
+

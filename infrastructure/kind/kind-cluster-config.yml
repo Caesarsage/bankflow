@@ -1,0 +1,47 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: bankflow
+nodes:
+  - role: control-plane
+    # Port mappings for our services
+    extraPortMappings:
+      # Identity Service
+      - containerPort: 30001
+        hostPort: 30001
+        protocol: TCP
+      # Customer Service
+      - containerPort: 30002
+        hostPort: 30002
+        protocol: TCP
+      # Account Service
+      - containerPort: 30003
+        hostPort: 30003
+        protocol: TCP
+      # Transaction Service
+      - containerPort: 30004
+        hostPort: 30004
+        protocol: TCP
+      # Notification Service
+      - containerPort: 30005
+        hostPort: 30005
+        protocol: TCP
+      # Fraud Service
+      - containerPort: 30006
+        hostPort: 30006
+        protocol: TCP
+      # Billing Service
+      - containerPort: 30007
+        hostPort: 30007
+        protocol: TCP
+      # Ingress
+      - containerPort: 80
+        hostPort: 80
+        protocol: TCP
+      - containerPort: 443
+        hostPort: 443
+        protocol: TCP
+
+  # Worker nodes
+  - role: worker
+  - role: worker
+  - role: worker

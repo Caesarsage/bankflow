@@ -1,0 +1,77 @@
+spring:
+  application:
+    name: customer-service
+
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:customer_db}
+    username: ${DB_USER:bankflow}
+    password: ${DB_PASSWORD:bankflow123}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 20000
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BROKERS:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.add.type.headers: false
+    consumer:
+      group-id: customer-service
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+        spring.json.use.type.headers: false  # ← Add this
+        spring.json.value.default.type: com.bankflow.customer.event.UserRegisteredEvent
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+server:
+  port: ${SERVER_PORT:8002}
+  error:
+    include-message: always
+    include-binding-errors: always
+
+# Custom application properties
+app:
+  kafka:
+    topics:
+      customer-events: customer-events
+      identity-events: identity-events
+
+  security:
+    encryption-key: ${ENCRYPTION_KEY:BankFlow-Default-Encryption-Key-Change-In-Production}
+
+  storage:
+    type: ${STORAGE_TYPE:local} # local, s3, minio
+    local:
+      base-path: ${LOCAL_STORAGE_PATH:/tmp/bankflow/documents}
+    s3:
+      bucket: ${S3_BUCKET:bankflow-documents}
+      region: ${S3_REGION:us-east-1}
+
+logging:
+  level:
+    com.bankflow: DEBUG
+    org.springframework.web: INFO
+    org.hibernate.SQL: DEBUG

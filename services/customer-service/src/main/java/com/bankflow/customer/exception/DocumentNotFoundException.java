@@ -1,0 +1,8 @@
+package com.bankflow.customer.exception;
+
+public class DocumentNotFoundException extends RuntimeException{
+    public DocumentNotFoundException(String message) {
+        super(message);
+    }
+}
+

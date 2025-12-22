@@ -1,0 +1,71 @@
+---
+# Strimzi Kafka Operator Configuration (v1 API with KRaft mode)
+# This is the recommended approach for running Kafka on Kubernetes
+#
+# Installation steps:
+# 1. Install Strimzi operator:
+#    kubectl create -f 'https://strimzi.io/install/latest?namespace=infrastructure' -n infrastructure
+#
+# 2. Apply this configuration:
+#    kubectl apply -f kafka-strimzi.yaml
+#
+# 3. Wait for Kafka cluster to be ready:
+#    kubectl wait kafka/kafka-cluster --for=condition=Ready --timeout=300s -n infrastructure
+
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaNodePool
+metadata:
+  name: kafka-brokers
+  labels:
+    strimzi.io/cluster: kafka-cluster
+  namespace: infrastructure
+spec:
+  replicas: 3
+  roles:
+    - controller
+    - broker
+  storage:
+    type: jbod
+    volumes:
+      - id: 0
+        type: persistent-claim
+        size: 10Gi
+        deleteClaim: false
+        kraftMetadata: shared
+  resources:
+    requests:
+      memory: 512Mi
+      cpu: 500m
+    limits:
+      memory: 1Gi
+      cpu: 1000m
+
+---
+apiVersion: kafka.strimzi.io/v1
+kind: Kafka
+metadata:
+  name: kafka-cluster
+  namespace: infrastructure
+spec:
+  kafka:
+    version: 4.1.1
+    metadataVersion: 4.1-IV1
+    listeners:
+      - name: plain
+        port: 9092
+        type: internal
+        tls: false
+    config:
+      offsets.topic.replication.factor: 3
+      transaction.state.log.replication.factor: 3
+      transaction.state.log.min.isr: 2
+      default.replication.factor: 3
+      min.insync.replicas: 2
+  entityOperator:
+    topicOperator: {}
+    userOperator: {}
+
+---
+# Note: Strimzi automatically creates services for the Kafka cluster
+# Access Kafka at: kafka-cluster-kafka-bootstrap.infrastructure.svc.cluster.local:9092
+# Or Pod in same namespace: kafka-cluster-kafka-bootstrap:9092
