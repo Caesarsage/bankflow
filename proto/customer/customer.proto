@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package customer;
+
+
+// Java package option - used ONLY by Java's protoc compiler
+option java_package = "com.bankflow.customer.proto";
+option java_outer_classname = "CustomerProto";
+option java_multiple_files = true;
+
+service CustomerService {
+  rpc GetCustomer(GetCustomerRequest) returns (GetCustomerResponse);
+  rpc GetCustomerByUserId(GetCustomerByUserIdRequest) returns (GetCustomerResponse);
+  rpc UpdateKycStatus(UpdateKycStatusRequest) returns (UpdateKycStatusResponse);
+  rpc SearchCustomers(SearchCustomersRequest) returns (SearchCustomersResponse);
+}
+
+message GetCustomerRequest {
+  string customer_id = 1;
+}
+
+message GetCustomerByUserIdRequest {
+  string user_id = 1;
+}
+
+message GetCustomerResponse {
+  Customer customer = 1;
+  Error error = 2;
+}
+
+message UpdateKycStatusRequest {
+  string customer_id = 1;
+  string kyc_status = 2;
+}
+
+message UpdateKycStatusResponse {
+  bool success = 1;
+  Error error = 2;
+}
+
+message SearchCustomersRequest {
+  string query = 1;
+  int32 page = 2;
+  int32 limit = 3;
+}
+
+message SearchCustomersResponse {
+  repeated Customer customers = 1;
+  int32 total = 2;
+  Error error = 3;
+}
+
+message Customer {
+  string id = 1;
+  string user_id = 2;
+  string first_name = 3;
+  string last_name = 4;
+  string date_of_birth = 5;
+  string address_line1 = 6;
+  string address_line2 = 7;
+  string city = 8;
+  string state = 9;
+  string zip_code = 10;
+  string country = 11;
+  string kyc_status = 12;
+  int64 kyc_verified_at = 13;
+  int64 created_at = 14;
+  int64 updated_at = 15;
+}
+
+message Error {
+  string code = 1;
+  string message = 2;
+}
+

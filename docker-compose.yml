@@ -1,0 +1,266 @@
+services:
+  # ============================================
+  # Infrastructure Services
+  # ============================================
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: bankflow-postgres
+    environment:
+      POSTGRES_USER: bankflow
+      POSTGRES_PASSWORD: bankflow123
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-databases.sql:/docker-entrypoint-initdb.d/init-databases.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bankflow"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - bankflow-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: bankflow-redis
+    # ports:
+    #   - "6379:6379"
+    command: redis-server --requirepass redis123
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - bankflow-network
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.0
+    container_name: bankflow-zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "2181"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - bankflow-network
+
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: bankflow-kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+      - "9093:9093"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://kafka:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT_INTERNAL
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "kafka-broker-api-versions",
+          "--bootstrap-server",
+          "localhost:9092",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - bankflow-network
+
+  # ============================================
+  # Microservices
+  # ============================================
+
+  identity-service:
+    build:
+      context: ./services/identity-service
+      dockerfile: Dockerfile
+    container_name: bankflow-identity-service
+    ports:
+      - "8001:8001"
+    environment:
+      PORT: "8001"
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      DB_NAME: identity_db
+      DB_USER: bankflow
+      DB_PASSWORD: bankflow123
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      REDIS_PASSWORD: redis123
+      JWT_SECRET: "your-super-secret-jwt-key-change-in-production"
+      JWT_EXPIRY: "15m"
+      REFRESH_TOKEN_EXPIRY: "168h"
+      KAFKA_BROKERS: kafka:29092
+      KAFKA_TOPIC: identity-events
+      ENV: development
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:8001/health",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - bankflow-network
+
+  customer-service:
+    build:
+      context: ./services/customer-service
+      dockerfile: Dockerfile
+    container_name: bankflow-customer-service
+    ports:
+      - "8002:8002"
+    environment:
+      SERVER_PORT: "8002"
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      DB_NAME: customer_db
+      DB_USER: bankflow
+      DB_PASSWORD: bankflow123
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/customer_db
+      SPRING_DATASOURCE_USERNAME: bankflow
+      SPRING_DATASOURCE_PASSWORD: bankflow123
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      KAFKA_TOPIC_CUSTOMER_EVENTS: customer-events
+      KAFKA_TOPIC_IDENTITY_EVENTS: identity-events
+      STORAGE_TYPE: local
+      LOCAL_STORAGE_PATH: /var/bankflow/documents
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      postgres:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:8002/health",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    volumes:
+      - customer_documents:/var/bankflow/documents
+    networks:
+      - bankflow-network
+
+  account-service:
+    build:
+      context: .
+      dockerfile: ./services/account-service/Dockerfile
+    container_name: bankflow-account-service
+    ports:
+      - "8004:8004"
+      # - "50051:50051" # gRPC (if implemented)
+    environment:
+      PORT: "8004"
+      GRPC_PORT: "50051"
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      DB_NAME: account_db
+      DB_USER: bankflow
+      DB_PASSWORD: bankflow123
+      KAFKA_BROKERS: kafka:29092
+      KAFKA_TOPIC: account-events
+      ENV: development
+    depends_on:
+      postgres:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8004/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - bankflow-network
+
+  transaction-service:
+    build:
+      context: ./services/transaction-service
+      dockerfile: Dockerfile
+    container_name: bankflow-transaction-service
+    ports:
+      - "8003:8003"
+    environment:
+      PORT: "8003"
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      DB_NAME: transaction_db
+      DB_USER: bankflow
+      DB_PASSWORD: bankflow123
+      KAFKA_BROKERS: kafka:29092
+      ACCOUNT_SERVICE_GRPC_URL: account-service:50051
+      ENV: development
+    depends_on:
+      postgres:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+      account-service:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:8003/health",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - bankflow-network
+
+networks:
+  bankflow-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
+  customer_documents:
+    driver: local

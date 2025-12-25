@@ -46,10 +46,10 @@ async function initializeServices() {
     // Connect Kafka producer
     await kafkaProducer.connect();
 
-    // Initialize Account Service client
-    const accountServiceURL = process.env.ACCOUNT_SERVICE_URL || 'http://localhost:8002';
+    // Initialize Account Service client (gRPC)
+    const accountServiceURL = process.env.ACCOUNT_SERVICE_GRPC_URL || 'account-service:50051';
     createAccountServiceClient(accountServiceURL);
-    console.log(`Account Service client initialized: ${accountServiceURL}`);
+    console.log(`Account Service gRPC client initialized: ${accountServiceURL}`);
 
     // Initialize service and controller
     transactionService = new TransactionService(pool, kafkaProducer);
@@ -63,7 +63,7 @@ async function initializeServices() {
 }
 
 // Health check
-app.get('/health', (req: Request, res: Response) => {
+app.get('/health', (_req: Request, res: Response) => {
   res.json({
     status: 'healthy',
     service: 'transaction-service',
@@ -72,15 +72,16 @@ app.get('/health', (req: Request, res: Response) => {
 });
 
 // API routes
-app.use('/api/v1/transactions', (req, res, next) => {
+app.use('/api/v1/transactions', (_req, res, next) => {
   if (!transactionController) {
-    return res.status(503).json({ error: 'Service not ready' });
+    res.status(503).json({ error: 'Service not ready' });
+    return;
   }
   next();
 }, createTransactionRoutes(transactionController));
 
 // Error handling middleware
-app.use((err: Error, req: Request, res: Response, next: any) => {
+app.use((err: Error, _req: Request, res: Response, _next: any) => {
   console.error('Error:', err);
   res.status(500).json({
     error: 'Internal server error',
@@ -89,7 +90,7 @@ app.use((err: Error, req: Request, res: Response, next: any) => {
 });
 
 // 404 handler
-app.use((req: Request, res: Response) => {
+app.use((_req: Request, res: Response) => {
   res.status(404).json({ error: 'Not found' });
 });
 

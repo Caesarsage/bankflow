@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        v6.33.2
-// source: proto/account/account.proto
+// source: account/account.proto
 
 package account
 
@@ -42,7 +42,7 @@ type Account struct {
 
 func (x *Account) Reset() {
 	*x = Account{}
-	mi := &file_proto_account_account_proto_msgTypes[0]
+	mi := &file_account_account_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -54,7 +54,7 @@ func (x *Account) String() string {
 func (*Account) ProtoMessage() {}
 
 func (x *Account) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_account_proto_msgTypes[0]
+	mi := &file_account_account_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67,7 +67,7 @@ func (x *Account) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Account.ProtoReflect.Descriptor instead.
 func (*Account) Descriptor() ([]byte, []int) {
-	return file_proto_account_account_proto_rawDescGZIP(), []int{0}
+	return file_account_account_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Account) GetId() string {
@@ -163,7 +163,7 @@ type GetAccountRequest struct {
 
 func (x *GetAccountRequest) Reset() {
 	*x = GetAccountRequest{}
-	mi := &file_proto_account_account_proto_msgTypes[1]
+	mi := &file_account_account_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -175,7 +175,7 @@ func (x *GetAccountRequest) String() string {
 func (*GetAccountRequest) ProtoMessage() {}
 
 func (x *GetAccountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_account_proto_msgTypes[1]
+	mi := &file_account_account_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -188,7 +188,7 @@ func (x *GetAccountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAccountRequest.ProtoReflect.Descriptor instead.
 func (*GetAccountRequest) Descriptor() ([]byte, []int) {
-	return file_proto_account_account_proto_rawDescGZIP(), []int{1}
+	return file_account_account_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *GetAccountRequest) GetAccountId() string {
@@ -208,7 +208,7 @@ type GetAccountResponse struct {
 
 func (x *GetAccountResponse) Reset() {
 	*x = GetAccountResponse{}
-	mi := &file_proto_account_account_proto_msgTypes[2]
+	mi := &file_account_account_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -220,7 +220,7 @@ func (x *GetAccountResponse) String() string {
 func (*GetAccountResponse) ProtoMessage() {}
 
 func (x *GetAccountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_account_proto_msgTypes[2]
+	mi := &file_account_account_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -233,7 +233,7 @@ func (x *GetAccountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAccountResponse.ProtoReflect.Descriptor instead.
 func (*GetAccountResponse) Descriptor() ([]byte, []int) {
-	return file_proto_account_account_proto_rawDescGZIP(), []int{2}
+	return file_account_account_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *GetAccountResponse) GetAccount() *Account {
@@ -259,7 +259,7 @@ type GetBalanceRequest struct {
 
 func (x *GetBalanceRequest) Reset() {
 	*x = GetBalanceRequest{}
-	mi := &file_proto_account_account_proto_msgTypes[3]
+	mi := &file_account_account_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -271,7 +271,7 @@ func (x *GetBalanceRequest) String() string {
 func (*GetBalanceRequest) ProtoMessage() {}
 
 func (x *GetBalanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_account_proto_msgTypes[3]
+	mi := &file_account_account_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -284,7 +284,7 @@ func (x *GetBalanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetBalanceRequest.ProtoReflect.Descriptor instead.
 func (*GetBalanceRequest) Descriptor() ([]byte, []int) {
-	return file_proto_account_account_proto_rawDescGZIP(), []int{3}
+	return file_account_account_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *GetBalanceRequest) GetAccountId() string {
@@ -305,7 +305,7 @@ type GetBalanceResponse struct {
 
 func (x *GetBalanceResponse) Reset() {
 	*x = GetBalanceResponse{}
-	mi := &file_proto_account_account_proto_msgTypes[4]
+	mi := &file_account_account_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -317,7 +317,7 @@ func (x *GetBalanceResponse) String() string {
 func (*GetBalanceResponse) ProtoMessage() {}
 
 func (x *GetBalanceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_account_proto_msgTypes[4]
+	mi := &file_account_account_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -330,7 +330,7 @@ func (x *GetBalanceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetBalanceResponse.ProtoReflect.Descriptor instead.
 func (*GetBalanceResponse) Descriptor() ([]byte, []int) {
-	return file_proto_account_account_proto_rawDescGZIP(), []int{4}
+	return file_account_account_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *GetBalanceResponse) GetBalance() float64 {
@@ -366,7 +366,7 @@ type UpdateBalanceRequest struct {
 
 func (x *UpdateBalanceRequest) Reset() {
 	*x = UpdateBalanceRequest{}
-	mi := &file_proto_account_account_proto_msgTypes[5]
+	mi := &file_account_account_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -378,7 +378,7 @@ func (x *UpdateBalanceRequest) String() string {
 func (*UpdateBalanceRequest) ProtoMessage() {}
 
 func (x *UpdateBalanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_account_proto_msgTypes[5]
+	mi := &file_account_account_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -391,7 +391,7 @@ func (x *UpdateBalanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateBalanceRequest.ProtoReflect.Descriptor instead.
 func (*UpdateBalanceRequest) Descriptor() ([]byte, []int) {
-	return file_proto_account_account_proto_rawDescGZIP(), []int{5}
+	return file_account_account_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *UpdateBalanceRequest) GetAccountId() string {
@@ -433,7 +433,7 @@ type UpdateBalanceResponse struct {
 
 func (x *UpdateBalanceResponse) Reset() {
 	*x = UpdateBalanceResponse{}
-	mi := &file_proto_account_account_proto_msgTypes[6]
+	mi := &file_account_account_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -445,7 +445,7 @@ func (x *UpdateBalanceResponse) String() string {
 func (*UpdateBalanceResponse) ProtoMessage() {}
 
 func (x *UpdateBalanceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_account_proto_msgTypes[6]
+	mi := &file_account_account_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -458,7 +458,7 @@ func (x *UpdateBalanceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateBalanceResponse.ProtoReflect.Descriptor instead.
 func (*UpdateBalanceResponse) Descriptor() ([]byte, []int) {
-	return file_proto_account_account_proto_rawDescGZIP(), []int{6}
+	return file_account_account_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *UpdateBalanceResponse) GetSuccess() bool {
@@ -494,7 +494,7 @@ type CreateHoldRequest struct {
 
 func (x *CreateHoldRequest) Reset() {
 	*x = CreateHoldRequest{}
-	mi := &file_proto_account_account_proto_msgTypes[7]
+	mi := &file_account_account_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -506,7 +506,7 @@ func (x *CreateHoldRequest) String() string {
 func (*CreateHoldRequest) ProtoMessage() {}
 
 func (x *CreateHoldRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_account_proto_msgTypes[7]
+	mi := &file_account_account_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -519,7 +519,7 @@ func (x *CreateHoldRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateHoldRequest.ProtoReflect.Descriptor instead.
 func (*CreateHoldRequest) Descriptor() ([]byte, []int) {
-	return file_proto_account_account_proto_rawDescGZIP(), []int{7}
+	return file_account_account_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *CreateHoldRequest) GetAccountId() string {
@@ -561,7 +561,7 @@ type CreateHoldResponse struct {
 
 func (x *CreateHoldResponse) Reset() {
 	*x = CreateHoldResponse{}
-	mi := &file_proto_account_account_proto_msgTypes[8]
+	mi := &file_account_account_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -573,7 +573,7 @@ func (x *CreateHoldResponse) String() string {
 func (*CreateHoldResponse) ProtoMessage() {}
 
 func (x *CreateHoldResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_account_proto_msgTypes[8]
+	mi := &file_account_account_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -586,7 +586,7 @@ func (x *CreateHoldResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateHoldResponse.ProtoReflect.Descriptor instead.
 func (*CreateHoldResponse) Descriptor() ([]byte, []int) {
-	return file_proto_account_account_proto_rawDescGZIP(), []int{8}
+	return file_account_account_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *CreateHoldResponse) GetHoldId() string {
@@ -619,7 +619,7 @@ type ReleaseHoldRequest struct {
 
 func (x *ReleaseHoldRequest) Reset() {
 	*x = ReleaseHoldRequest{}
-	mi := &file_proto_account_account_proto_msgTypes[9]
+	mi := &file_account_account_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -631,7 +631,7 @@ func (x *ReleaseHoldRequest) String() string {
 func (*ReleaseHoldRequest) ProtoMessage() {}
 
 func (x *ReleaseHoldRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_account_proto_msgTypes[9]
+	mi := &file_account_account_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -644,7 +644,7 @@ func (x *ReleaseHoldRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReleaseHoldRequest.ProtoReflect.Descriptor instead.
 func (*ReleaseHoldRequest) Descriptor() ([]byte, []int) {
-	return file_proto_account_account_proto_rawDescGZIP(), []int{9}
+	return file_account_account_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ReleaseHoldRequest) GetHoldId() string {
@@ -664,7 +664,7 @@ type ReleaseHoldResponse struct {
 
 func (x *ReleaseHoldResponse) Reset() {
 	*x = ReleaseHoldResponse{}
-	mi := &file_proto_account_account_proto_msgTypes[10]
+	mi := &file_account_account_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -676,7 +676,7 @@ func (x *ReleaseHoldResponse) String() string {
 func (*ReleaseHoldResponse) ProtoMessage() {}
 
 func (x *ReleaseHoldResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_account_proto_msgTypes[10]
+	mi := &file_account_account_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -689,7 +689,7 @@ func (x *ReleaseHoldResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReleaseHoldResponse.ProtoReflect.Descriptor instead.
 func (*ReleaseHoldResponse) Descriptor() ([]byte, []int) {
-	return file_proto_account_account_proto_rawDescGZIP(), []int{10}
+	return file_account_account_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ReleaseHoldResponse) GetSuccess() bool {
@@ -715,7 +715,7 @@ type StreamBalanceRequest struct {
 
 func (x *StreamBalanceRequest) Reset() {
 	*x = StreamBalanceRequest{}
-	mi := &file_proto_account_account_proto_msgTypes[11]
+	mi := &file_account_account_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -727,7 +727,7 @@ func (x *StreamBalanceRequest) String() string {
 func (*StreamBalanceRequest) ProtoMessage() {}
 
 func (x *StreamBalanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_account_proto_msgTypes[11]
+	mi := &file_account_account_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -740,7 +740,7 @@ func (x *StreamBalanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamBalanceRequest.ProtoReflect.Descriptor instead.
 func (*StreamBalanceRequest) Descriptor() ([]byte, []int) {
-	return file_proto_account_account_proto_rawDescGZIP(), []int{11}
+	return file_account_account_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *StreamBalanceRequest) GetAccountId() string {
@@ -762,7 +762,7 @@ type BalanceUpdate struct {
 
 func (x *BalanceUpdate) Reset() {
 	*x = BalanceUpdate{}
-	mi := &file_proto_account_account_proto_msgTypes[12]
+	mi := &file_account_account_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -774,7 +774,7 @@ func (x *BalanceUpdate) String() string {
 func (*BalanceUpdate) ProtoMessage() {}
 
 func (x *BalanceUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_account_proto_msgTypes[12]
+	mi := &file_account_account_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -787,7 +787,7 @@ func (x *BalanceUpdate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BalanceUpdate.ProtoReflect.Descriptor instead.
 func (*BalanceUpdate) Descriptor() ([]byte, []int) {
-	return file_proto_account_account_proto_rawDescGZIP(), []int{12}
+	return file_account_account_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *BalanceUpdate) GetAccountId() string {
@@ -829,7 +829,7 @@ type BatchUpdateResponse struct {
 
 func (x *BatchUpdateResponse) Reset() {
 	*x = BatchUpdateResponse{}
-	mi := &file_proto_account_account_proto_msgTypes[13]
+	mi := &file_account_account_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -841,7 +841,7 @@ func (x *BatchUpdateResponse) String() string {
 func (*BatchUpdateResponse) ProtoMessage() {}
 
 func (x *BatchUpdateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_account_proto_msgTypes[13]
+	mi := &file_account_account_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -854,7 +854,7 @@ func (x *BatchUpdateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchUpdateResponse.ProtoReflect.Descriptor instead.
 func (*BatchUpdateResponse) Descriptor() ([]byte, []int) {
-	return file_proto_account_account_proto_rawDescGZIP(), []int{13}
+	return file_account_account_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *BatchUpdateResponse) GetSuccessCount() int32 {
@@ -888,7 +888,7 @@ type MonitorRequest struct {
 
 func (x *MonitorRequest) Reset() {
 	*x = MonitorRequest{}
-	mi := &file_proto_account_account_proto_msgTypes[14]
+	mi := &file_account_account_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -900,7 +900,7 @@ func (x *MonitorRequest) String() string {
 func (*MonitorRequest) ProtoMessage() {}
 
 func (x *MonitorRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_account_proto_msgTypes[14]
+	mi := &file_account_account_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -913,7 +913,7 @@ func (x *MonitorRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MonitorRequest.ProtoReflect.Descriptor instead.
 func (*MonitorRequest) Descriptor() ([]byte, []int) {
-	return file_proto_account_account_proto_rawDescGZIP(), []int{14}
+	return file_account_account_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *MonitorRequest) GetAccountId() string {
@@ -942,7 +942,7 @@ type AccountEvent struct {
 
 func (x *AccountEvent) Reset() {
 	*x = AccountEvent{}
-	mi := &file_proto_account_account_proto_msgTypes[15]
+	mi := &file_account_account_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -954,7 +954,7 @@ func (x *AccountEvent) String() string {
 func (*AccountEvent) ProtoMessage() {}
 
 func (x *AccountEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_account_proto_msgTypes[15]
+	mi := &file_account_account_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -967,7 +967,7 @@ func (x *AccountEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountEvent.ProtoReflect.Descriptor instead.
 func (*AccountEvent) Descriptor() ([]byte, []int) {
-	return file_proto_account_account_proto_rawDescGZIP(), []int{15}
+	return file_account_account_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *AccountEvent) GetEventType() string {
@@ -1008,7 +1008,7 @@ type Error struct {
 
 func (x *Error) Reset() {
 	*x = Error{}
-	mi := &file_proto_account_account_proto_msgTypes[16]
+	mi := &file_account_account_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1020,7 +1020,7 @@ func (x *Error) String() string {
 func (*Error) ProtoMessage() {}
 
 func (x *Error) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_account_proto_msgTypes[16]
+	mi := &file_account_account_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1033,7 +1033,7 @@ func (x *Error) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Error.ProtoReflect.Descriptor instead.
 func (*Error) Descriptor() ([]byte, []int) {
-	return file_proto_account_account_proto_rawDescGZIP(), []int{16}
+	return file_account_account_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *Error) GetCode() string {
@@ -1050,11 +1050,11 @@ func (x *Error) GetMessage() string {
 	return ""
 }
 
-var File_proto_account_account_proto protoreflect.FileDescriptor
+var File_account_account_proto protoreflect.FileDescriptor
 
-const file_proto_account_account_proto_rawDesc = "" +
+const file_account_account_proto_rawDesc = "" +
 	"\n" +
-	"\x1bproto/account/account.proto\x12\aaccount\"\xff\x02\n" +
+	"\x15account/account.proto\x12\aaccount\"\xff\x02\n" +
 	"\aAccount\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12%\n" +
 	"\x0eaccount_number\x18\x02 \x01(\tR\raccountNumber\x12\x1f\n" +
@@ -1153,19 +1153,19 @@ const file_proto_account_account_proto_rawDesc = "" +
 	"\x0fMonitorAccounts\x12\x17.account.MonitorRequest\x1a\x15.account.AccountEvent(\x010\x01B>Z<github.com/Caesarsage/bankflow/account-service/proto/accountb\x06proto3"
 
 var (
-	file_proto_account_account_proto_rawDescOnce sync.Once
-	file_proto_account_account_proto_rawDescData []byte
+	file_account_account_proto_rawDescOnce sync.Once
+	file_account_account_proto_rawDescData []byte
 )
 
-func file_proto_account_account_proto_rawDescGZIP() []byte {
-	file_proto_account_account_proto_rawDescOnce.Do(func() {
-		file_proto_account_account_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_account_account_proto_rawDesc), len(file_proto_account_account_proto_rawDesc)))
+func file_account_account_proto_rawDescGZIP() []byte {
+	file_account_account_proto_rawDescOnce.Do(func() {
+		file_account_account_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_account_account_proto_rawDesc), len(file_account_account_proto_rawDesc)))
 	})
-	return file_proto_account_account_proto_rawDescData
+	return file_account_account_proto_rawDescData
 }
 
-var file_proto_account_account_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
-var file_proto_account_account_proto_goTypes = []any{
+var file_account_account_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_account_account_proto_goTypes = []any{
 	(*Account)(nil),               // 0: account.Account
 	(*GetAccountRequest)(nil),     // 1: account.GetAccountRequest
 	(*GetAccountResponse)(nil),    // 2: account.GetAccountResponse
@@ -1184,7 +1184,7 @@ var file_proto_account_account_proto_goTypes = []any{
 	(*AccountEvent)(nil),          // 15: account.AccountEvent
 	(*Error)(nil),                 // 16: account.Error
 }
-var file_proto_account_account_proto_depIdxs = []int32{
+var file_account_account_proto_depIdxs = []int32{
 	0,  // 0: account.GetAccountResponse.account:type_name -> account.Account
 	16, // 1: account.GetAccountResponse.error:type_name -> account.Error
 	16, // 2: account.GetBalanceResponse.error:type_name -> account.Error
@@ -1215,26 +1215,26 @@ var file_proto_account_account_proto_depIdxs = []int32{
 	0,  // [0:7] is the sub-list for field type_name
 }
 
-func init() { file_proto_account_account_proto_init() }
-func file_proto_account_account_proto_init() {
-	if File_proto_account_account_proto != nil {
+func init() { file_account_account_proto_init() }
+func file_account_account_proto_init() {
+	if File_account_account_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_account_account_proto_rawDesc), len(file_proto_account_account_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_account_account_proto_rawDesc), len(file_account_account_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_proto_account_account_proto_goTypes,
-		DependencyIndexes: file_proto_account_account_proto_depIdxs,
-		MessageInfos:      file_proto_account_account_proto_msgTypes,
+		GoTypes:           file_account_account_proto_goTypes,
+		DependencyIndexes: file_account_account_proto_depIdxs,
+		MessageInfos:      file_account_account_proto_msgTypes,
 	}.Build()
-	File_proto_account_account_proto = out.File
-	file_proto_account_account_proto_goTypes = nil
-	file_proto_account_account_proto_depIdxs = nil
+	File_account_account_proto = out.File
+	file_account_account_proto_goTypes = nil
+	file_account_account_proto_depIdxs = nil
 }

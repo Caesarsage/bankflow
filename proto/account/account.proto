@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package account;
 
+// Go package option
 option go_package = "github.com/Caesarsage/bankflow/account-service/proto/account";
 
 // Account Service Definition
@@ -126,3 +127,4 @@ message Error {
   string code = 1;
   string message = 2;
 }
+

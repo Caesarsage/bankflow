@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package fraud;
+
+// Go package option - used ONLY by Go's protoc compiler
+// Ignored by Java, Node.js, Python, etc.
+option go_package = "github.com/Caesarsage/bankflow/fraud-service/proto/fraud";
+
+// Java package option - used ONLY by Java's protoc compiler
+// Ignored by Go, Node.js, Python, etc.
+option java_package = "com.bankflow.fraud.proto";
+option java_outer_classname = "FraudProto";
+option java_multiple_files = true;
+
+service FraudService {
+  rpc CheckTransaction(CheckTransactionRequest) returns (CheckTransactionResponse);
+  rpc ReportFraud(ReportFraudRequest) returns (ReportFraudResponse);
+  rpc GetFraudScore(GetFraudScoreRequest) returns (GetFraudScoreResponse);
+}
+
+message CheckTransactionRequest {
+  string transaction_id = 1;
+  string from_account_id = 2;
+  string to_account_id = 3;
+  double amount = 4;
+  string currency = 5;
+  map<string, string> metadata = 6;
+}
+
+message CheckTransactionResponse {
+  bool is_fraud = 1;
+  double fraud_score = 2;
+  string reason = 3;
+  Error error = 4;
+}
+
+message ReportFraudRequest {
+  string transaction_id = 1;
+  string account_id = 2;
+  string reason = 3;
+  string description = 4;
+}
+
+message ReportFraudResponse {
+  bool success = 1;
+  string fraud_case_id = 2;
+  Error error = 3;
+}
+
+message GetFraudScoreRequest {
+  string account_id = 1;
+}
+
+message GetFraudScoreResponse {
+  double fraud_score = 1;
+  string risk_level = 2;
+  Error error = 3;
+}
+
+message Error {
+  string code = 1;
+  string message = 2;
+}
+

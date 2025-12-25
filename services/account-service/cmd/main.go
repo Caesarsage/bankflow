@@ -7,10 +7,10 @@ import (
 	"os"
 	"strings"
 
+	"github.com/Caesarsage/bankflow/account-service/internal/handlers"
 	"github.com/Caesarsage/bankflow/account-service/internal/kafka"
 	"github.com/Caesarsage/bankflow/account-service/internal/repository"
 	"github.com/Caesarsage/bankflow/account-service/internal/service"
-	"github.com/Caesarsage/bankflow/account-service/internal/handlers"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
@@ -24,7 +24,7 @@ func main() {
 	dbPort := getEnv("DB_PORT", "5432")
 	dbUser := getEnv("DB_USER", "bankflow")
 	dbPassword := getEnv("DB_PASSWORD", "bankflow123")
-	dbName := getEnv("DB_NAME", "identity_db")
+	dbName := getEnv("DB_NAME", "account_db")
 	port := getEnv("PORT", "8002")
 
 	kafkaBrokers := getEnv("KAFKA_BROKERS", "localhost:9092")

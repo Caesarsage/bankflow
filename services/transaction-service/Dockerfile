@@ -16,6 +16,8 @@ RUN npm run build
 # Production stage
 FROM node:20-alpine
 
+RUN apk --no-cache add wget
+
 WORKDIR /app
 
 # Copy package files
@@ -31,8 +33,10 @@ COPY --from=builder /app/dist ./dist
 EXPOSE 8003
 
 # Run as non-root user
-RUN addgroup -g 1000 worker && adduser -D -u 1000 -G worker worker
-RUN chown -R worker:worker /root
+RUN addgroup worker && \
+  adduser -D -G worker worker
+
+RUN chown -R worker:worker /app
 USER worker
 
 # Health check

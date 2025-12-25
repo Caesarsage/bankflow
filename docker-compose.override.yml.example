@@ -1,0 +1,30 @@
+# Example override file for local development
+# Copy this to docker-compose.override.yml and customize as needed
+# docker-compose.override.yml is automatically loaded by docker-compose
+
+services:
+  # Override to mount source code for hot-reload development
+  identity-service:
+    volumes:
+      - ./services/identity-service:/app
+    environment:
+      ENV: development
+
+  customer-service:
+    volumes:
+      - ./services/customer-service:/app
+    environment:
+      SPRING_PROFILES_ACTIVE: development
+
+  account-service:
+    volumes:
+      - ./services/account-service:/app
+    environment:
+      ENV: development
+
+  transaction-service:
+    volumes:
+      - ./services/transaction-service:/app
+    environment:
+      NODE_ENV: development
+

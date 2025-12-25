@@ -1,5 +1,3 @@
-// src/routes/transaction.routes.ts
-
 import { Router } from 'express';
 import { TransactionController } from '../controllers/transaction.controller';
 

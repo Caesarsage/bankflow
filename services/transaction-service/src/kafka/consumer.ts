@@ -42,7 +42,7 @@ export class KafkaConsumer {
 
   async consume(handler: (message: any) => Promise<void>): Promise<void> {
     await this.consumer.run({
-      eachMessage: async ({ topic, partition, message }: EachMessagePayload) => {
+      eachMessage: async ({ topic, message }: EachMessagePayload) => {
         try {
           const value = message.value?.toString();
           if (value) {

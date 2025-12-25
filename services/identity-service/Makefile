@@ -2,8 +2,8 @@
 
 # Proto file path (relative to project root)
 PROTO_ROOT = ../../proto
-ACCOUNT_PROTO = $(PROTO_ROOT)/account/account.proto
-OUTPUT_DIR = proto
+IDENTITY_PROTO = $(PROTO_ROOT)/identity/identity.proto
+OUTPUT_DIR = proto/identity
 
 help:
 	@echo "Available targets:"
@@ -18,23 +18,18 @@ proto-install:
 	@echo "Dependencies installed successfully"
 
 proto:
-	@echo "Generating Go code from $(ACCOUNT_PROTO)..."
+	@echo "Generating Go code from $(IDENTITY_PROTO)..."
 	@mkdir -p $(OUTPUT_DIR)
 	@protoc --proto_path=$(PROTO_ROOT) \
 		--go_out=$(OUTPUT_DIR) \
 		--go_opt=paths=source_relative \
 		--go-grpc_out=$(OUTPUT_DIR) \
 		--go-grpc_opt=paths=source_relative \
-		account/account.proto
+		identity/identity.proto
 	@echo "Go code generated successfully in $(OUTPUT_DIR)"
-	@if [ -f "$(OUTPUT_DIR)/account.pb.go" ]; then \
-		echo "Generated files:"; \
-		ls -la $(OUTPUT_DIR)/*.pb.go; \
-	else \
-		echo "Warning: No files generated. Check proto file path."; \
-	fi
 
 proto-clean:
 	@echo "Cleaning generated files in $(OUTPUT_DIR)..."
 	@rm -rf $(OUTPUT_DIR)/*.pb.go
 	@echo "Clean complete"
+
