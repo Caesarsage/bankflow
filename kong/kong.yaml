@@ -1,0 +1,61 @@
+_format_version: "3.0"
+
+services:
+  - name: identity-service
+    url: http://identity-service:8001
+    routes:
+      - name: auth-routes
+        paths:
+          - /auth
+        strip_path: false
+
+  - name: account-service
+    url: http://account-service:8004
+    routes:
+      - name: account-routes
+        paths:
+          - /accounts
+        strip_path: false
+
+  - name: transaction-service
+    url: http://transaction-service:8003
+    routes:
+      - name: transaction-routes
+        paths:
+          - /transactions
+        strip_path: false
+
+plugins:
+
+  # -------------------------
+  # JWT Authentication
+  # -------------------------
+  - name: jwt
+    config:
+      claims_to_verify:
+        - exp
+      key_claim_name: iss
+
+  # -------------------------
+  # Rate limiting (global)
+  # -------------------------
+  - name: rate-limiting
+    config:
+      minute: 100
+      policy: local
+
+  # -------------------------
+  # CORS
+  # -------------------------
+  - name: cors
+    config:
+      origins:
+        - "*"
+      methods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+      headers:
+        - Authorization
+        - Content-Type
